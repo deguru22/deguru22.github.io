@@ -1,0 +1,290 @@
+<!doctype html><html lang=kr><meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<title>ARM 어셈블리 튜토리얼 (3) ARM & Thumb | 데구루루x2 놀이터</title>
+<meta name=generator content="Hugo Eureka 0.8.2">
+<link rel=stylesheet href=/css/eureka.min.css>
+<script defer src=/js/eureka.min.js></script>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
+<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
+<link rel=preconnect href=https://www.google-analytics.com crossorigin>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-164568875-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-164568875-1')</script>
+<link rel=icon type=image/png sizes=32x32 href=/images/deguru22_hufc063740f6f81162e489d60dbe402c0f_388931_32x32_fill_q75_box_center.jpg>
+<link rel=apple-touch-icon sizes=180x180 href=/images/deguru22_hufc063740f6f81162e489d60dbe402c0f_388931_180x180_fill_q75_box_center.jpg>
+<meta name=description content="ARM 어셈블리 기본 내용">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"/kr/posts/"},{"@type":"ListItem","position":2,"name":"ARM 어셈블리 튜토리얼 (3) ARM \u0026 Thumb","item":"/kr/2021/08/30/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-3-arm-thumb/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"/kr/2021/08/30/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-3-arm-thumb/"},"headline":"ARM 어셈블리 튜토리얼 (3) ARM \u0026 Thumb | 데구루루x2 놀이터","datePublished":"2021-08-30T22:08:12+09:00","dateModified":"2021-08-30T22:08:12+09:00","wordCount":2418,"publisher":{"@type":"Person","name":"deguru22","logo":{"@type":"ImageObject","url":"/images/deguru22.jpg"}},"description":"ARM 어셈블리 기본 내용"}</script><meta property="og:title" content="ARM 어셈블리 튜토리얼 (3) ARM & Thumb | 데구루루x2 놀이터">
+<meta property="og:type" content="article">
+<meta property="og:image" content="/images/deguru22.jpg">
+<meta property="og:url" content="/kr/2021/08/30/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-3-arm-thumb/">
+<meta property="og:description" content="ARM 어셈블리 기본 내용">
+<meta property="og:locale" content="kr">
+<meta property="og:site_name" content="데구루루x2 놀이터">
+<meta property="article:published_time" content="2021-08-30T22:08:12+09:00">
+<meta property="article:modified_time" content="2021-08-30T22:08:12+09:00">
+<meta property="article:section" content="posts">
+<body class="flex flex-col min-h-screen">
+<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+<a href=/kr class="mr-6 text-primary-text text-xl font-bold">데구루루x2 놀이터</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i>
+</button>
+<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+<a href=/kr/#about class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About</a>
+<a href=/kr/posts/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">Posts</a>
+</div>
+<div class=flex>
+<div class="relative pt-4 md:pt-0">
+<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
+<i class="fas fa-adjust"></i>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
+</div>
+<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
+<span class="px-4 py-1 hover:text-eureka" name=Light></span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark></span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto></span>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
+</div>
+</nav>
+<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
+</div>
+</header>
+<main class="flex-grow pt-16">
+<div class=pl-scrollbar>
+<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+<h1 class="font-bold text-3xl text-primary-text">ARM 어셈블리 튜토리얼 (3) ARM & Thumb</h1>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2021-08-30</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span></span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=/kr/categories/arm/ class=hover:text-eureka>ARM</a>
+<span>, </span>
+<a href=/kr/categories/assembly/ class=hover:text-eureka>Assembly</a>
+<span>, </span>
+<a href=/kr/categories/tutorial/ class=hover:text-eureka>Tutorial</a>
+</div>
+</div>
+<div class=content>
+<p>ARM Assembly에 대해 공부하던 중 좋은 글이 있어 번역 하였다.</p>
+<p>출처: Azeria Labs (<a href=https://azeria-labs.com/writing-arm-assembly-part-3/>https://azeria-labs.com/writing-arm-assembly-part-3/</a>)</p>
+<hr>
+<p>ARM은 실행하기 위해 두 개의 상태(Jazelle는 제외하도록 합니다)를 가지고 있습니다 - ARM과 Thumb 입니다. 이 상태들은 권한과는 관계가 없습니다. 예를들어 SVC 모드에서 실행되는 코드는 ARM 일 수도 Thumb일 수도 있습니다. 두 상태의 주요 다른 점은 명령어 셋입니다. ARM 상태일때는 명령어가 항상 32-bit 이지만, Thumb 상태의 명령어 셋은 16-bit 입니다(그러나 32-bit 일 수도 있습니다). <strong>언제, 어떻게 Thumb를 쓰는지 아는 것이 ARM 익스플로잇 개발에 매우 중요합니다. ARM 쉘코드를 작성할 때 우리는 16-bit Thumb 명령어를 통해 NULL 바이트를 없앨 수 있습니다.</strong></p>
+<p>ARM의 호출 규약은 헷갈리는 것 이상이며, 모든 ARM 버전이 같은 Thumb 명령어 셋을 지원하지 않습니다. 어떤 부분에서는, ARM이 향상된 Thumb 명령어 세트(이름: Thumbv2)를 지원하며, 해당 명령어 셋은 32-bit Thumb 명령어 셋과 이전 버전에서 제공하지 않은 조건문 분기를 지원합니다. Thumb 상태에서 조건문 실행을 하기 위해서 <code>it</code> 명령어가 새로 추가되었습니다. 그렇지만, 이 명령이 이후 버전에서 삭제되면서 덜 복잡한 명령으로 변경되었습니다. ARM/Thumb 명령어 셋의 모든 변경사항을 알지는 못하지만, 솔직하게는 신경 쓰지 않습니다. 당신도 마찬가지 입니다. 너가 알아야 될 것은 당신이 목표로 하는 기기의 ARM 버전과 Thumb 서포트 여부를 통해 당신의 코드를 수정하는 것입니다. ARM Infocenter는 어떻게 하면 당신의 ARM 버전을 알 수 있는지 <a href=http://infocenter.arm.com/help/index.jsp>가이드</a>를 제공하고 있습니다.</p>
+<p>위에서 이미 언급 했듯이, Thumb 버전은 여러개가 있습니다. 이름이 다른것은 각각의 차별점을 두기 위함입니다 (프로세서 자체는 언제나 Thumb로 불립니다.)</p>
+<ul>
+<li>Thumb-1 (16-bit 명령어): ARMv6 및 이전 아키텍쳐에서 사용</li>
+<li>Thumb-2 (16-bit and 32-bit 명령어) Thumb-1을 확장하여 더 많은 명령어를 16-bit 혹은 32-bit 로 사용할 수 있게 함 (ARMv6T2, ARMv7)</li>
+<li>ThumbEE: 동적 생성 코드에 대응하기 위한 변경 및 추가 버전 (코드가 기기에 명령 실행 직전 혹은 동안에 컴파일됨)</li>
+</ul>
+<p>ARM과 Thumb의 차이:</p>
+<ul>
+<li>조건부 실행: 모든 ARM 명령어는 조건부 실행을 지원합니다. 일부 ARM 프로세서 버전은 Thumb에서도 조건부 실행을 IT 명령을 통해 지원합니다. 조건부 실행은 실행하는 명령어의 숫자를 줄이고 많은 자원이 드는 분기 명령을 줄임으로서 코드의 밀도를 높여줍니다.</li>
+<li>32-bit ARM과 Thumb 명령어: 32-bit Thumb 명령은 명령어 뒤에 w 가 붙습니다.</li>
+<li>배럴 시프터(barrel shifter)는 ARM 모드의 특이한 기능입니다. 이것은 여러 명령을 1개로 줄여줍니다. 예를 들어서 곱하기 명령 실행을 위해 레지스터를 2로 곱한 후 MOV로 결과를 저장하는 두 개의 명령어를 MOV 명령만 실행하고 MOV 내부에서 오른쪽으로 1 시프트 하여 곱할 수 있도록(MOV R1, R0, LSL#1; R1 = R0 * 2) 할 수 있습니다.</li>
+</ul>
+<p>프로세서가 실행하는 상태 변경을 위해서는, 아래 둘 중 하나의 조건을 갖추어야 합니다.</p>
+<ul>
+<li>분기 명령을 BX(분기 및 교환) 혹은 BLX(분기, 링크 그리고 교환) 명령을 사용할 수 있어야 하고 목적 레지스터의 가장 낮은 바이트(least-signifant-bit)가 1이여야 합니다. 오프셋에 1을 더하면 이 기준을 충족할 수 있습니다 (예: 0x5530 + 1). 이렇게 하면 비트 정렬(alignment) 문제가 생길 수 있다고 생각할 수 있지만, 명령어들이 이미 2바이트 혹은 4바이트로 정렬돼 있고 가장 낮은 바이트(least-significant-bit)는 프로세서가 무시하므로 문제가 되지 않습니다. 더욱 자세한 것은 Part 6. 조건 실행과 분기 를 통해 확인하세요.</li>
+<li>우리는 CPSR에 T 비트가 설정돼 있으면 Thumb 모드임을 알 수 있습니다.</li>
+</ul>
+<h2 id=arm-명령어-셋-소개>ARM 명령어 셋 소개</h2>
+<p>이 파트를 통해 ARM의 명령어 세트를 소개합니다. 이 파트를 통해서 어셈블리가 얼마나 작은 단위의 명령을 수행하는지 알아보고, 어떻게 그 명령어들이 연결되어 있고, 명령어들을 엮어서 사용하는 방법에 대해서 배웁니다.</p>
+<p>위에서 언급했듯이, 어셈블리 언어는 메인 블록을 만들기 위한 명령어 셋의 집합으로 이루어져 있습니다. ARM 명령어는 한개 혹은 두개의 피연산자를 아래 템플릿 형태로 가지고 있습니다.</p>
+<pre><code>MNEMONIC{S}{condition} {Rd}, Operand1, Operand2
+</code></pre>
+<p>ARM 명령어 세트의 유연성으로 인해서, 필드 안의 모든 인자들이 사용되지는 않습니다. 그렇지만 템플릿은 아래와 같은 내용으로 각 필드를 정의하고 있습니다.</p>
+<pre><code>MNEMONIC - 명령어의 별칭
+{S} - (선택) 명령어 접미사. S가 기재되어 있다면 명령의 결과에 따라 조건 플래그가 업데이트 됩니다
+{condition} - 명령어 실행을 위해 맞추어야 하는 조건
+{Rd} - 명령 실행 결과를 저장할 레지스터 (도착지)
+Operand1 - 첫번째 인자값. 레지스터 혹은 값 직접 입력
+Operand2 - 두번째 인자값(일수도 있고 아닐수도 있음). 직접 값 입력 혹은 레지스터
+</code></pre>
+<p>위의 값들 중 MNEMONIC, S, Rd, Operand1 는 고정돼 있지만 condition과 Operand2의 경우 상황에 따라 다르게 쓰일 수 있습니다. condition 필드가 CPSR 레지스터의 값을 기반으로 설정이 되기 때문입니다. Operand2는 유연한 인자값으로 불리는데, 우리가 이 값을 다양하게 쓸 수 있기 때문입니다. 직접 값으로 사용할 수도 있고, 레지스터나, 쉬프트 한 레지스터 값 등을 포함할 수 있습니다. 예를 들어 우리는 Operand2에 아래와 같은 표현을 사용할 수 있습니다.</p>
+<pre><code>#123 - 값 직접 입력
+Rx - Register x (R1, R2, R3, ...)
+Rx, ASR n - 레지스터 x를 오른쪽으로 n비트 만큼 산술 쉬프트 한 값
+Rx, LSL n - 레지스터 x를 왼쪽으로 n비트 만큼 논리 쉬프트 한 값
+Rx, LSR n - 레지스터 x를 오른쪽으로 n비트 만큼 논리 쉬프트 한 값
+Rx, ROR n - 레지스터 x를 n비트 만큼 로테이션 한 값
+Rx, RRX - 레지스터 x를 1비트만큼 확장하여 로테이션 한 값
+</code></pre>
+<p>단적으로 명령어들이 어떻게 다르게 생겼는지 아래의 예시를 통해 알아봅시다.</p>
+<pre><code>ADD R0, R1, R2 - R1과 R2를 더해서 R0에 저장
+ADD R0, R1, #2 - R1과 2를 더해서 R0에 저장
+MOVLE R0, #5 - 조건 LE(적거나 같음)이 충족하면 숫자 5를 R0으로 옮깁니다
+MOV R0, R1, LSL #1 - R1을 오른쪽으로 1비트 만큼 논리 쉬프트 하여 R0에 저장
+</code></pre>
+<p>아래에서 간략한 명령어 종류 및 설명을 확인해 봅시다.</p>
+<table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MOV</td>
+<td>데이터 이동</td>
+</tr>
+<tr>
+<td>MVN</td>
+<td>데이터 이동 및 부언 (negate; 0을 1로, 1을 0으로)</td>
+</tr>
+<tr>
+<td>ADD</td>
+<td>더하기</td>
+</tr>
+<tr>
+<td>SUB</td>
+<td>빼기</td>
+</tr>
+<tr>
+<td>MUL</td>
+<td>곱하기</td>
+</tr>
+<tr>
+<td>LSL</td>
+<td>논리 쉬프트 (왼쪽)</td>
+</tr>
+<tr>
+<td>LSR</td>
+<td>논리 쉬프트 (오른쪽)</td>
+</tr>
+<tr>
+<td>ASR</td>
+<td>산술 쉬프트 (오른쪽)</td>
+</tr>
+<tr>
+<td>ROR</td>
+<td>로테이션 (오른쪽)</td>
+</tr>
+<tr>
+<td>CMP</td>
+<td>비교</td>
+</tr>
+<tr>
+<td>AND</td>
+<td>Bitwise AND</td>
+</tr>
+<tr>
+<td>ORR</td>
+<td>Bitwise OR</td>
+</tr>
+<tr>
+<td>EOR</td>
+<td>Bitwise XOR</td>
+</tr>
+<tr>
+<td>LDR</td>
+<td>불러오기</td>
+</tr>
+<tr>
+<td>STR</td>
+<td>저장하기</td>
+</tr>
+<tr>
+<td>LDM</td>
+<td>여러개 불러오기</td>
+</tr>
+<tr>
+<td>STM</td>
+<td>여러개 저장하기</td>
+</tr>
+<tr>
+<td>PUSH</td>
+<td>스택에 푸시</td>
+</tr>
+<tr>
+<td>POP</td>
+<td>스택에서 팝</td>
+</tr>
+<tr>
+<td>B</td>
+<td>분기</td>
+</tr>
+<tr>
+<td>BL</td>
+<td>링크 하며 분기</td>
+</tr>
+<tr>
+<td>BX</td>
+<td>교환 하며 분기</td>
+</tr>
+<tr>
+<td>SWI/SVC</td>
+<td>시스템 콜</td>
+</tr>
+<tr>
+<td>BLX</td>
+<td>링크 및 교환 하며 분기</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+<div>
+</div>
+<div class="md:text-right mt-4 md:mt-0">
+<span class="block font-bold"></span>
+<a href=/kr/2021/08/22/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%80%EC%9E%85%EA%B3%BC-%EB%A0%88%EC%A7%80%EC%8A%A4%ED%84%B0/ class=block>ARM 어셈블리 튜토리얼 (2) 데이터 타입과 레지스터</a>
+</div>
+</div>
+<div id=disqus_thread></div>
+<script>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//deguru22-notes.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class=col-span-2>
+<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
+<span class="text-lg font-semibold"></span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#arm-명령어-셋-소개>ARM 명령어 셋 소개</a></li>
+</ul>
+</nav>
+</div>
+<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
+</div>
+</div>
+<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
+</div>
+</div>
+</main>
+<footer class=pl-scrollbar>
+<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+<p class="text-sm text-tertiary-text">&copy; 2021 deguru22
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
+</div></div>
+</footer>
+</body>
+</html>
