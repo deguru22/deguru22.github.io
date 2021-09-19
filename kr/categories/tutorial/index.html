@@ -22,14 +22,14 @@
 <link rel=apple-touch-icon sizes=180x180 href=/images/deguru22_hufc063740f6f81162e489d60dbe402c0f_388931_180x180_fill_q75_box_center.jpg>
 <meta name=description content="Eureka is a elegant and powerful theme for Hugo.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Categories","item":"/kr/categories/"},{"@type":"ListItem","position":2,"name":"Tutorial","item":"/kr/categories/tutorial/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"ARM 어셈블리 튜토리얼 (3) ARM \u0026 Thumb","description":"ARM 어셈블리 기본 내용","url":"/kr/2021/08/30/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-3-arm-thumb/"},{"@type":"ListItem","position":2,"name":"ARM 어셈블리 튜토리얼 (2) 데이터 타입과 레지스터","description":"ARM 어셈블리 기본 내용","url":"/kr/2021/08/22/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%80%EC%9E%85%EA%B3%BC-%EB%A0%88%EC%A7%80%EC%8A%A4%ED%84%B0/"},{"@type":"ListItem","position":3,"name":"ARM 어셈블리 튜토리얼 (1) 기초","description":"ARM 어셈블리 기본 내용","url":"/kr/2021/08/18/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-1-%EA%B8%B0%EC%B4%88/"}]}</script><meta property="og:title" content="Tutorial | 데구루루x2 놀이터">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"ARM 어셈블리 튜토리얼 (4) 메모리 명령어: 불러오기 및 저장","description":"ARM 어셈블리 기본 내용","url":"/kr/2021/09/19/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-4-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0-%EB%B0%8F-%EC%A0%80%EC%9E%A5/"},{"@type":"ListItem","position":2,"name":"ARM 어셈블리 튜토리얼 (3) ARM \u0026 Thumb","description":"ARM 어셈블리 기본 내용","url":"/kr/2021/08/30/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-3-arm-thumb/"},{"@type":"ListItem","position":3,"name":"ARM 어셈블리 튜토리얼 (2) 데이터 타입과 레지스터","description":"ARM 어셈블리 기본 내용","url":"/kr/2021/08/22/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%80%EC%9E%85%EA%B3%BC-%EB%A0%88%EC%A7%80%EC%8A%A4%ED%84%B0/"}]}</script><meta property="og:title" content="Tutorial | 데구루루x2 놀이터">
 <meta property="og:type" content="website">
 <meta property="og:image" content="/images/deguru22.jpg">
 <meta property="og:url" content="/kr/categories/tutorial/">
 <meta property="og:description" content="Eureka is a elegant and powerful theme for Hugo.">
 <meta property="og:locale" content="kr">
 <meta property="og:site_name" content="데구루루x2 놀이터">
-<meta property="og:updated_time" content="2021-08-30T22:08:12+09:00">
+<meta property="og:updated_time" content="2021-09-19T16:52:34+09:00">
 <meta property="article:section" content="categories">
 <link rel=alternate type=application/rss+xml href=/kr/categories/tutorial/index.xml title="데구루루x2 놀이터">
 <body class="flex flex-col min-h-screen">
@@ -74,6 +74,36 @@
 </article>
 <div class="bg-secondary-bg rounded px-6">
 <div class="overflow-hidden divide-y">
+<div class=py-6>
+<div class="flex flex-col-reverse lg:flex-row justify-between">
+<div class=w-full>
+<div class=mb-4>
+<a href=/kr/2021/09/19/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-4-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0-%EB%B0%8F-%EC%A0%80%EC%9E%A5/ class="font-bold text-xl hover:text-eureka">ARM 어셈블리 튜토리얼 (4) 메모리 명령어: 불러오기 및 저장</a>
+</div>
+<div class=content>
+ARM Assembly에 대해 공부하던 중 좋은 글이 있어 번역 하였다. 출처: Azeria Labs (https://azeria-labs.com/writing-arm-assembly-part-4/) ARM은 메모리 접근 시 오직 불러오기-저장(load-store, LDR and STR) 명령만을 사용
+</div>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2021-09-19</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span></span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=/kr/categories/arm/ class=hover:text-eureka>ARM</a>
+<span>, </span>
+<a href=/kr/categories/assembly/ class=hover:text-eureka>Assembly</a>
+<span>, </span>
+<a href=/kr/categories/tutorial/ class=hover:text-eureka>Tutorial</a>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class=py-6>
 <div class="flex flex-col-reverse lg:flex-row justify-between">
 <div class=w-full>
@@ -134,38 +164,28 @@ ARM Assembly에 대해 공부하던 중 좋은 글이 있어 번역 하였다. �
 </div>
 </div>
 </div>
-<div class=py-6>
-<div class="flex flex-col-reverse lg:flex-row justify-between">
-<div class=w-full>
-<div class=mb-4>
-<a href=/kr/2021/08/18/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-1-%EA%B8%B0%EC%B4%88/ class="font-bold text-xl hover:text-eureka">ARM 어셈블리 튜토리얼 (1) 기초</a>
-</div>
-<div class=content>
-ARM Assembly에 대해 공부하던 중 좋은 글이 있어 번역 하였다. 출처: Azeria Labs (https://azeria-labs.com/writing-arm-assembly-part-1/) ARM Assembly Basics 튜토리얼 시리즈에 오신 여러분을 환영합니다! 이 문서는 ARM Exploit 개발 튜토리얼 전에 알아야
-</div>
-<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
-<div class="mr-6 my-2">
-<i class="fas fa-calendar mr-1"></i>
-<span>2021-08-18</span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-clock mr-1"></i>
-<span></span>
-</div>
-<div class="mr-6 my-2">
-<i class="fas fa-folder mr-1"></i>
-<a href=/kr/categories/arm/ class=hover:text-eureka>ARM</a>
-<span>, </span>
-<a href=/kr/categories/assembly/ class=hover:text-eureka>Assembly</a>
-<span>, </span>
-<a href=/kr/categories/tutorial/ class=hover:text-eureka>Tutorial</a>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<ul class="pagination pagination-default">
+<li class="page-item disabled">
+<a href=# aria-disabled=true aria-label=First class=page-link role=button tabindex=-1><span aria-hidden=true>&#171;&#171;</span></a>
+</li>
+<li class="page-item disabled">
+<a href=# aria-disabled=true aria-label=Previous class=page-link role=button tabindex=-1><span aria-hidden=true>&#171;</span></a>
+</li>
+<li class="page-item active">
+<a href=# aria-current=page aria-label="Page 1" class=page-link role=button>1</a>
+</li>
+<li class=page-item>
+<a href=/kr/categories/tutorial/page/2/ aria-label="Page 2" class=page-link role=button>2</a>
+</li>
+<li class=page-item>
+<a href=/kr/categories/tutorial/page/2/ aria-label=Next class=page-link role=button><span aria-hidden=true>&#187;</span></a>
+</li>
+<li class=page-item>
+<a href=/kr/categories/tutorial/page/2/ aria-label=Last class=page-link role=button><span aria-hidden=true>&#187;&#187;</span></a>
+</li>
+</ul>
 </div>
 </div>
 </main>
