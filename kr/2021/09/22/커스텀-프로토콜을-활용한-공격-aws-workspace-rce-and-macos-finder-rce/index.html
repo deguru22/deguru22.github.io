@@ -1,6 +1,6 @@
 <!doctype html><html lang=kr><meta charset=utf-8>
 <meta name=viewport content="width=device-width">
-<title>커스텀 프로토콜을 활용한 공격? AWS Workspace RCE and macOS Finder RCE | 데구루루x2 놀이터</title>
+<title>커스텀 프로토콜을 활용한 공격 - AWS Workspace RCE and macOS Finder RCE | 데구루루x2 놀이터</title>
 <meta name=generator content="Hugo Eureka 0.8.2">
 <link rel=stylesheet href=/css/eureka.min.css>
 <script defer src=/js/eureka.min.js></script>
@@ -21,8 +21,8 @@
 <link rel=icon type=image/png sizes=32x32 href=/images/deguru22_hufc063740f6f81162e489d60dbe402c0f_388931_32x32_fill_q75_box_center.jpg>
 <link rel=apple-touch-icon sizes=180x180 href=/images/deguru22_hufc063740f6f81162e489d60dbe402c0f_388931_180x180_fill_q75_box_center.jpg>
 <meta name=description content="커스텀 프로토콜을 활용한 RCE 공격들에 대해 살펴봅니다.">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"/kr/posts/"},{"@type":"ListItem","position":2,"name":"커스텀 프로토콜을 활용한 공격? AWS Workspace RCE and macOS Finder RCE","item":"/kr/2021/09/22/%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B3%B5%EA%B2%A9-aws-workspace-rce-and-macos-finder-rce/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"/kr/2021/09/22/%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B3%B5%EA%B2%A9-aws-workspace-rce-and-macos-finder-rce/"},"headline":"커스텀 프로토콜을 활용한 공격? AWS Workspace RCE and macOS Finder RCE | 데구루루x2 놀이터","datePublished":"2021-09-22T00:49:21+09:00","dateModified":"2021-09-22T00:49:21+09:00","wordCount":1729,"publisher":{"@type":"Person","name":"deguru22","logo":{"@type":"ImageObject","url":"/images/deguru22.jpg"}},"description":"커스텀 프로토콜을 활용한 RCE 공격들에 대해 살펴봅니다."}</script><meta property="og:title" content="커스텀 프로토콜을 활용한 공격? AWS Workspace RCE and macOS Finder RCE | 데구루루x2 놀이터">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"/kr/posts/"},{"@type":"ListItem","position":2,"name":"커스텀 프로토콜을 활용한 공격 - AWS Workspace RCE and macOS Finder RCE","item":"/kr/2021/09/22/%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B3%B5%EA%B2%A9-aws-workspace-rce-and-macos-finder-rce/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"/kr/2021/09/22/%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B3%B5%EA%B2%A9-aws-workspace-rce-and-macos-finder-rce/"},"headline":"커스텀 프로토콜을 활용한 공격 - AWS Workspace RCE and macOS Finder RCE | 데구루루x2 놀이터","datePublished":"2021-09-22T00:49:21+09:00","dateModified":"2021-09-22T00:49:21+09:00","wordCount":1729,"publisher":{"@type":"Person","name":"deguru22","logo":{"@type":"ImageObject","url":"/images/deguru22.jpg"}},"description":"커스텀 프로토콜을 활용한 RCE 공격들에 대해 살펴봅니다."}</script><meta property="og:title" content="커스텀 프로토콜을 활용한 공격 - AWS Workspace RCE and macOS Finder RCE | 데구루루x2 놀이터">
 <meta property="og:type" content="article">
 <meta property="og:image" content="/images/deguru22.jpg">
 <meta property="og:url" content="/kr/2021/09/22/%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B3%B5%EA%B2%A9-aws-workspace-rce-and-macos-finder-rce/">
@@ -71,7 +71,7 @@
 <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
 <div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
 <div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
-<h1 class="font-bold text-3xl text-primary-text">커스텀 프로토콜을 활용한 공격? AWS Workspace RCE and macOS Finder RCE</h1>
+<h1 class="font-bold text-3xl text-primary-text">커스텀 프로토콜을 활용한 공격 - AWS Workspace RCE and macOS Finder RCE</h1>
 <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
 <div class="mr-6 my-2">
 <i class="fas fa-calendar mr-1"></i>
