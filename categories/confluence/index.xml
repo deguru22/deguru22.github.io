@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Confluence on 데구루루x2 놀이터</title>
+    <link>https://deguru22.github.io/categories/confluence/</link>
+    <description>Recent content in Confluence on 데구루루x2 놀이터</description>
+    <image>
+      <url>https://deguru22.github.io/static/deguru22.jpg</url>
+      <link>https://deguru22.github.io/static/deguru22.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 05 Sep 2021 23:49:36 +0900</lastBuildDate><atom:link href="https://deguru22.github.io/categories/confluence/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>컨플루언스 OGNL Injection (RCE) 취약점 (CVE-2021-26084)</title>
+      <link>https://deguru22.github.io/posts/cve-2021-26084_confluence-ognl-rce/</link>
+      <pubDate>Sun, 05 Sep 2021 23:49:36 +0900</pubDate>
+      
+      <guid>https://deguru22.github.io/posts/cve-2021-26084_confluence-ognl-rce/</guid>
+      <description>CVE-2021-26084 컨플루언스 원격 명령 실행 취약점 분석</description>
+    </item>
+    
+  </channel>
+</rss>

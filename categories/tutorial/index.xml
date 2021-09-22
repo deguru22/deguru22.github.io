@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tutorial on 데구루루x2 놀이터</title>
+    <link>https://deguru22.github.io/categories/tutorial/</link>
+    <description>Recent content in Tutorial on 데구루루x2 놀이터</description>
+    <image>
+      <url>https://deguru22.github.io/static/deguru22.jpg</url>
+      <link>https://deguru22.github.io/static/deguru22.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 19 Sep 2021 16:52:34 +0900</lastBuildDate><atom:link href="https://deguru22.github.io/categories/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ARM 어셈블리 튜토리얼 (4) 메모리 명령어: 불러오기 및 저장</title>
+      <link>https://deguru22.github.io/posts/arm-assembly-4/</link>
+      <pubDate>Sun, 19 Sep 2021 16:52:34 +0900</pubDate>
+      
+      <guid>https://deguru22.github.io/posts/arm-assembly-4/</guid>
+      <description>ARM 어셈블리 기본 내용</description>
+    </item>
+    
+    <item>
+      <title>ARM 어셈블리 튜토리얼 (3) ARM &amp; Thumb</title>
+      <link>https://deguru22.github.io/posts/arm-assembly-3/</link>
+      <pubDate>Mon, 30 Aug 2021 22:08:12 +0900</pubDate>
+      
+      <guid>https://deguru22.github.io/posts/arm-assembly-3/</guid>
+      <description>ARM 어셈블리 기본 내용</description>
+    </item>
+    
+    <item>
+      <title>ARM 어셈블리 튜토리얼 (2) 데이터 타입과 레지스터</title>
+      <link>https://deguru22.github.io/posts/arm-assembly-2/</link>
+      <pubDate>Sun, 22 Aug 2021 20:32:12 +0900</pubDate>
+      
+      <guid>https://deguru22.github.io/posts/arm-assembly-2/</guid>
+      <description>ARM 어셈블리 기본 내용</description>
+    </item>
+    
+  </channel>
+</rss>

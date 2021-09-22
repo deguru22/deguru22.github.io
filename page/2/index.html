@@ -66,91 +66,36 @@
 </nav>
 </header>
 <main class=main>
-<article class="first-entry home-info">
-<header class=entry-header>
-<h1>Hi human 👋</h1>
-</header>
-<section class=entry-content>
-<p>Welcome to my playground</p>
-</section>
-<footer class=entry-footer>
-<div class=social-icons>
-<a href=https://github.com/deguru22 target=_blank rel="noopener noreferrer me" title=Github><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
-</a>
-</div>
-</footer>
-</article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>URI Scheme을 활용한 공격 - AWS Workspace RCE / macOS Finder RCE
-</h2>
-</header>
-<section class=entry-content>
-<p>요약 URI Scheme을 활용한 RCE 취약점이 최근 눈에 띄어, 흥미로워서 공유합니다.
-사례1) AWS Workspace에서 사용하는 workspaces:// 스키마를 활용한 RCE 공격 (CVE-2021-38112)
-사례2) 맥에서 inetloc 확장자 파일 내에서 file:// 스키마를 활용한 RCE 공격 (최초 제보자: 박민찬, 개인 연구자)
-커스텀 URI Scheme 개발 시 파라미터를 통한 명령 실행 가능 여부를 늘 주의해야 하며, 로컬에서 임의 변경 후 실행 시 대응하기 어려운 클라이언트 프로그램의 구조적 한계를 고려하여 언제나 최소한의 기능만 처리할 수 있도록 최소 권한의 법칙(Principle of least privilege) 을 잊지 말아야 합니다....</p>
-</section>
-<footer class=entry-footer>September 22, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;deguru22</footer>
-<a class=entry-link aria-label="post link to URI Scheme을 활용한 공격 - AWS Workspace RCE / macOS Finder RCE" href=https://deguru22.github.io/posts/custom-protocol-rce/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>ARM 어셈블리 튜토리얼 (4) 메모리 명령어: 불러오기 및 저장
+<h2>ARM 어셈블리 튜토리얼 (1) 기초
 </h2>
 </header>
 <section class=entry-content>
 <p>ARM Assembly에 대해 공부하던 중 좋은 글이 있어 번역 하였다.
-출처: Azeria Labs (https://azeria-labs.com/writing-arm-assembly-part-4/)
-ARM은 메모리 접근 시 오직 불러오기-저장(load-store, LDR and STR) 명령만을 사용 하도록 하는 불러오기-저장 모델을 사용합니다. x86에서 대부분의 명령들은 직접 메모리 안의 데이터를 접근하는 것과 달리, ARM에서는 데이터는 반드시 처리 전에 레지스터로 불러오는 과정을 거쳐야 합니다. 이 말인 즉슨 특정 메모리에 올라와 있는 32-bit 값을 ARM에서 증가 시키려면 3개의 명령어(불러오기, 증가하기, 저장)를 실행 해야 한다는 이야기 입니다....</p>
+출처: Azeria Labs (https://azeria-labs.com/writing-arm-assembly-part-1/)
+ARM Assembly Basics 튜토리얼 시리즈에 오신 여러분을 환영합니다! 이 문서는 ARM Exploit 개발 튜토리얼 전에 알아야 할 내용을 담고 있습니다. ARM 쉘코드를 작성하고 ROP 체인을 만들기 전에 ARM Assembly 기초에 대해서 알아야 합니다.
+아래 주제들을 순차적으로 다룰 예정입니다.
+ARM Assembly 기본 튜토리얼 시리즈:
+Part 1. ARM Assembly 기본 Part 2. 데이터 타입 레지스터 Part 3....</p>
 </section>
-<footer class=entry-footer>September 19, 2021&nbsp;·&nbsp;11 min&nbsp;·&nbsp;deguru22</footer>
-<a class=entry-link aria-label="post link to ARM 어셈블리 튜토리얼 (4) 메모리 명령어: 불러오기 및 저장" href=https://deguru22.github.io/posts/arm-assembly-4/></a>
+<footer class=entry-footer>August 18, 2021&nbsp;·&nbsp;6 min&nbsp;·&nbsp;deguru22</footer>
+<a class=entry-link aria-label="post link to ARM 어셈블리 튜토리얼 (1) 기초" href=https://deguru22.github.io/posts/arm-assembly-1/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>컨플루언스 OGNL Injection (RCE) 취약점 (CVE-2021-26084)
+<h2>안녕!
 </h2>
 </header>
 <section class=entry-content>
-<p>요약 컨플루언스에서 권한 없이 원격 명령 실행 가능한 취약점 발생, 해당 취약점 패치 배포 완료 (2021-08-25)
-OGNL(Object Graph Navigation Language) 취약점을 이용한 것으로, 이전에 발견된 Apache Struts2 (CVE-2017-5638)과 유사한 취약점. Velocity 지시자 파라미터는 = 기준으로 파싱되기 전에 먼저 실행이 되는 OGNL과 VTL 사이의 구조적 문제로 발생함
-해당 취약점을 활용한 exploit code가 공개되어있고, 권한 없는 사용자도 원격 실행이 가능하므로 빠른 패치가 필요함
-이 문서에서는 아래 내용을 다룹니다 docker-compose 를 통한 취약점 재현 환경 설정 및 실습...</p>
+<p>첫 포스팅 :wave: 조금씩 꾸준히 화이팅!</p>
 </section>
-<footer class=entry-footer>September 5, 2021&nbsp;·&nbsp;6 min&nbsp;·&nbsp;deguru22</footer>
-<a class=entry-link aria-label="post link to 컨플루언스 OGNL Injection (RCE) 취약점 (CVE-2021-26084)" href=https://deguru22.github.io/posts/cve-2021-26084_confluence-ognl-rce/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>ARM 어셈블리 튜토리얼 (3) ARM & Thumb
-</h2>
-</header>
-<section class=entry-content>
-<p>ARM Assembly에 대해 공부하던 중 좋은 글이 있어 번역 하였다.
-출처: Azeria Labs (https://azeria-labs.com/writing-arm-assembly-part-3/)
-ARM은 실행하기 위해 두 개의 상태(Jazelle는 제외하도록 합니다)를 가지고 있습니다 - ARM과 Thumb 입니다. 이 상태들은 권한과는 관계가 없습니다. 예를들어 SVC 모드에서 실행되는 코드는 ARM 일 수도 Thumb일 수도 있습니다. 두 상태의 주요 다른 점은 명령어 셋입니다. ARM 상태일때는 명령어가 항상 32-bit 이지만, Thumb 상태의 명령어 셋은 16-bit 입니다(그러나 32-bit 일 수도 있습니다). 언제, 어떻게 Thumb를 쓰는지 아는 것이 ARM 익스플로잇 개발에 매우 중요합니다....</p>
-</section>
-<footer class=entry-footer>August 30, 2021&nbsp;·&nbsp;5 min&nbsp;·&nbsp;deguru22</footer>
-<a class=entry-link aria-label="post link to ARM 어셈블리 튜토리얼 (3) ARM & Thumb" href=https://deguru22.github.io/posts/arm-assembly-3/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>ARM 어셈블리 튜토리얼 (2) 데이터 타입과 레지스터
-</h2>
-</header>
-<section class=entry-content>
-<p>ARM Assembly에 대해 공부하던 중 좋은 글이 있어 번역 하였다.
-출처: Azeria Labs (https://azeria-labs.com/writing-arm-assembly-part-2/)
-데이터 타입들 하이레벨 언어들과 비슷하게, ARM은 다른 데이터타입에 대한 연산을 지원합니다. 우리가 불러오거나 저장할 수 있는 데이터 타입들은 부호가 없는 워드(unsigned words), 반 워드(half words), 혹은 바이트(bytes) 입니다. 이 데이터 타입들에 대해 붙는 전치사(익스텐션)들은: -h or -sh: halfwords, -b or -sb: bytes이며 워드(words)는 익스텐션이 없습니다. 부호가 있는(signed) 것과 없는(unsigned)것의 차이는 아래와 같습니다.
-부호가 있는 데이터 타입들은 양수와 음수를 모두 저장할 수 있으므로, 표현할 수 있는 범위(range)가 적습니다....</p>
-</section>
-<footer class=entry-footer>August 22, 2021&nbsp;·&nbsp;8 min&nbsp;·&nbsp;deguru22</footer>
-<a class=entry-link aria-label="post link to ARM 어셈블리 튜토리얼 (2) 데이터 타입과 레지스터" href=https://deguru22.github.io/posts/arm-assembly-2/></a>
+<footer class=entry-footer>July 18, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;deguru22</footer>
+<a class=entry-link aria-label="post link to 안녕!" href=https://deguru22.github.io/posts/hello/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
-<a class=next href=https://deguru22.github.io/page/2/>Next Page »</a>
+<a class=prev href=https://deguru22.github.io/>« Prev Page</a>
 </nav>
 </footer>
 </main>
