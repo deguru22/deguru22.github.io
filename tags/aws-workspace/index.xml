@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>AWS Workspace on 데구루루x2 놀이터</title>
     <link>https://deguru22.github.io/tags/aws-workspace/</link>
     <description>Recent content in AWS Workspace on 데구루루x2 놀이터</description>
+    <image>
+      <url>https://deguru22.github.io/static/deguru22.jpg</url>
+      <link>https://deguru22.github.io/static/deguru22.jpg</link>
+    </image>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Wed, 22 Sep 2021 00:49:21 +0900</lastBuildDate><atom:link href="https://deguru22.github.io/tags/aws-workspace/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -12,10 +16,7 @@
       <pubDate>Wed, 22 Sep 2021 00:49:21 +0900</pubDate>
       
       <guid>https://deguru22.github.io/2021/09/22/uri-scheme%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B3%B5%EA%B2%A9-aws-workspace-rce-macos-finder-rce/</guid>
-      <description>요약   URI Scheme을 활용한 RCE 취약점이 최근 눈에 띄어, 흥미로워서 공유합니다.
-  사례1) AWS Workspace에서 사용하는 workspaces:// 스키마를 활용한 RCE 공격 (CVE-2021-38112)
-  사례2) 맥에서 inetloc 확장자 파일 내에서 file:// 스키마를 활용한 RCE 공격 (최초 제보자: 박민찬, 개인 연구자)
-    커스텀 URI Scheme 개발 시 파라미터를 통한 명령 실행 가능 여부를 늘 주의해야 하며, 로컬에서 임의 변경 후 실행 시 대응하기 어려운 클라이언트 프로그램의 구조적 한계를 고려하여 언제나 최소한의 기능만 처리할 수 있도록 최소 권한의 법칙(Principle of least privilege) 을 잊지 말아야 합니다.</description>
+      <description>URI Scheme을 활용한 RCE 공격들에 대해 살펴봅니다.</description>
     </item>
     
   </channel>

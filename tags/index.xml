@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on 데구루루x2 놀이터</title>
     <link>https://deguru22.github.io/tags/</link>
     <description>Recent content in Tags on 데구루루x2 놀이터</description>
+    <image>
+      <url>https://deguru22.github.io/static/deguru22.jpg</url>
+      <link>https://deguru22.github.io/static/deguru22.jpg</link>
+    </image>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Wed, 22 Sep 2021 00:49:21 +0900</lastBuildDate><atom:link href="https://deguru22.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
