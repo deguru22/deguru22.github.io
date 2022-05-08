@@ -9,7 +9,34 @@
       <link>https://deguru22.github.io/static/deguru22.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 22 Sep 2021 00:49:21 +0900</lastBuildDate><atom:link href="https://deguru22.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 May 2022 22:20:44 +0900</lastBuildDate><atom:link href="https://deguru22.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ARM</title>
+      <link>https://deguru22.github.io/tags/arm/</link>
+      <pubDate>Sun, 08 May 2022 22:20:44 +0900</pubDate>
+      
+      <guid>https://deguru22.github.io/tags/arm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Assembly</title>
+      <link>https://deguru22.github.io/tags/assembly/</link>
+      <pubDate>Sun, 08 May 2022 22:20:44 +0900</pubDate>
+      
+      <guid>https://deguru22.github.io/tags/assembly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>https://deguru22.github.io/tags/tutorial/</link>
+      <pubDate>Sun, 08 May 2022 22:20:44 +0900</pubDate>
+      
+      <guid>https://deguru22.github.io/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>AWS Workspace</title>
       <link>https://deguru22.github.io/tags/aws-workspace/</link>
@@ -79,33 +106,6 @@
       <pubDate>Wed, 22 Sep 2021 00:49:21 +0900</pubDate>
       
       <guid>https://deguru22.github.io/tags/vulnerability/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ARM</title>
-      <link>https://deguru22.github.io/tags/arm/</link>
-      <pubDate>Sun, 19 Sep 2021 16:52:34 +0900</pubDate>
-      
-      <guid>https://deguru22.github.io/tags/arm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Assembly</title>
-      <link>https://deguru22.github.io/tags/assembly/</link>
-      <pubDate>Sun, 19 Sep 2021 16:52:34 +0900</pubDate>
-      
-      <guid>https://deguru22.github.io/tags/assembly/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tutorial</title>
-      <link>https://deguru22.github.io/tags/tutorial/</link>
-      <pubDate>Sun, 19 Sep 2021 16:52:34 +0900</pubDate>
-      
-      <guid>https://deguru22.github.io/tags/tutorial/</guid>
       <description></description>
     </item>
     

@@ -9,7 +9,16 @@
       <link>https://deguru22.github.io/static/deguru22.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 22 Sep 2021 00:49:21 +0900</lastBuildDate><atom:link href="https://deguru22.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 May 2022 22:20:44 +0900</lastBuildDate><atom:link href="https://deguru22.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ARM 어셈블리 튜토리얼 (5) 여러 값 불러오기/저장하기</title>
+      <link>https://deguru22.github.io/2022/05/08/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-5-%EC%97%AC%EB%9F%AC-%EA%B0%92-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0/%EC%A0%80%EC%9E%A5%ED%95%98%EA%B8%B0/</link>
+      <pubDate>Sun, 08 May 2022 22:20:44 +0900</pubDate>
+      
+      <guid>https://deguru22.github.io/2022/05/08/arm-%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-5-%EC%97%AC%EB%9F%AC-%EA%B0%92-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0/%EC%A0%80%EC%9E%A5%ED%95%98%EA%B8%B0/</guid>
+      <description>ARM 어셈블리 튜토리얼</description>
+    </item>
+    
     <item>
       <title>URI Scheme을 활용한 공격 - AWS Workspace RCE, macOS Finder RCE</title>
       <link>https://deguru22.github.io/2021/09/22/uri-scheme%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-%EA%B3%B5%EA%B2%A9-aws-workspace-rce-macos-finder-rce/</link>
